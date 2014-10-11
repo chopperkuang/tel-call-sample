@@ -16,43 +16,33 @@
 
 package com.dooioo.tel.web;
 
-import com.dooioo.tel.service.HelloWorldService;
+import com.dooioo.tel.service.PhoneService;
+import com.mongodb.util.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.Map;
-
 @Controller
-public class SampleController {
+public class IndexController {
 
 	@Autowired
-	private HelloWorldService helloWorldService;
+	private PhoneService helloWorldService;
 
-	@RequestMapping("/")
-	@ResponseBody
-	public String helloWorld() {
-		return this.helloWorldService.getHelloMessage();
-	}
-
-    @RequestMapping("/xml")
+    @RequestMapping("/test")
     public @ResponseBody XmlResult xmlResult() {
         return new XmlResult(7123456, "15601622811", "15601622811");
     }
 
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome(Model model) {
-        model.addAttribute("time", new Date());
-        model.addAttribute("message", this.helloWorldService.getHelloMessage());
-        return "welcome";
-    }
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index(Model model) {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
         return "index";
     }
+
+    @RequestMapping(value = "/phones", method = RequestMethod.GET)
+    public @ResponseBody String phones() {
+        return JSON.serialize(helloWorldService.query());
+    }
+
 }

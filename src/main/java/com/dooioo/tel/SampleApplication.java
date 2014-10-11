@@ -16,6 +16,7 @@
 
 package com.dooioo.tel;
 
+import com.dooioo.tel.websocket.CallHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -27,6 +28,8 @@ import org.springframework.context.annotation.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -34,7 +37,7 @@ import javax.servlet.ServletContextListener;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class SampleApplication extends SpringBootServletInitializer {
+public class SampleApplication extends SpringBootServletInitializer  implements WebSocketConfigurer {
     private static Log logger = LogFactory.getLog(SampleApplication.class);
 
     @Override
@@ -46,4 +49,8 @@ public class SampleApplication extends SpringBootServletInitializer {
 		SpringApplication.run(SampleApplication.class, args);
 	}
 
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new CallHandler(), "/socket").withSockJS();
+    }
 }
