@@ -28,8 +28,10 @@ import org.springframework.context.annotation.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -37,6 +39,7 @@ import javax.servlet.ServletContextListener;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
+@EnableWebSocket
 public class SampleApplication extends SpringBootServletInitializer  implements WebSocketConfigurer {
     private static Log logger = LogFactory.getLog(SampleApplication.class);
 
@@ -45,12 +48,13 @@ public class SampleApplication extends SpringBootServletInitializer  implements 
         return application.sources(SampleApplication.class);
     }
 
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new PerConnectionWebSocketHandler(CallHandler.class), "/socket").withSockJS();
+    }
+
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SampleApplication.class, args);
 	}
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new CallHandler(), "/socket").withSockJS();
-    }
 }

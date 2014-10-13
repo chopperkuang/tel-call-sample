@@ -46,11 +46,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="phone in phones">
+                            <tr ng-repeat="phone in phones" ng-class="{'info': phone.calling}">
                                 <td>{{phone.id}}</td>
                                 <td>{{phone.name}}</td>
                                 <td>{{phone.phoneGo}}</td>
-                                <td>未接通</td>
+                                <td>{{phone.status}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -35,10 +35,6 @@ public class PhoneService {
 	@Value("${application.message}")
 	private String name;
 
-	public String getHelloMessage() {
-		return "Hello " + this.name;
-	}
-
     public void insert(String name, String phoneGo) {
         BasicDBObject basicDBObject = new BasicDBObject();
         basicDBObject.put("name", name);
