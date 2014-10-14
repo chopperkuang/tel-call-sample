@@ -100,7 +100,7 @@ public class CallController {
         }
         String xmlResult =  J2XMarshaller.marshal(phoneListResult);
 
-        PostMethod post = new PostMethod("http://localhost:10110/call/batch");
+        PostMethod post = new PostMethod("http://192.168.100.10:30090/call/batch");
         try {
             RequestEntity entity = new StringRequestEntity(xmlResult, "application/xml; charset=UTF-8", "UTF-8");
             post.setRequestEntity(entity);
