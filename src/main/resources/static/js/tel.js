@@ -15,9 +15,17 @@ angular.module('telApp', ['bd.sockjs'])
             });
         };
 
+        $scope.start = function() {
+            $http.get("/call/toSubmit").success(function(data){
+                console.log(data);
+            });
+        }
+
         $http.get('/phones').success(function(data) {
             $scope.phones =  data;
         });
+
+
 
         //start socket
         mySocket.setHandler('open', function () {

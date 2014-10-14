@@ -19,7 +19,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="javascript:void(0);" target="_blank" ng-click="add();"><span class="glyphicon glyphicon-plus"></span> 导入数据</a></li>
-                <li><a href="javascript:void(0);" target="_blank" ng-click=""><span class="glyphicon glyphicon-play"></span> 开始拨打!</a></li>
+                <li><a href="javascript:void(0);" target="_blank" ng-click="start();"><span class="glyphicon glyphicon-play"></span> 开始拨打!</a></li>
                 <li><a href="/setting" target="_blank"><span class="glyphicon glyphicon-cog"></span> 系统设置</a></li>
             </ul>
         </div>
