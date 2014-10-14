@@ -36,6 +36,11 @@ import org.springframework.web.socket.handler.PerConnectionWebSocketHandler;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * 启动类
+ * 一个简单的应用，做个demo演示用
+ */
+
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan

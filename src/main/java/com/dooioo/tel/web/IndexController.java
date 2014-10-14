@@ -28,12 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndexController {
 
 	@Autowired
-	private PhoneService helloWorldService;
-
-    @RequestMapping("/test")
-    public @ResponseBody XmlResult xmlResult() {
-        return new XmlResult(7123456, "15601622811", "15601622811");
-    }
+	private PhoneService phoneService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -42,7 +37,12 @@ public class IndexController {
 
     @RequestMapping(value = "/phones", method = RequestMethod.GET)
     public @ResponseBody String phones() {
-        return JSON.serialize(helloWorldService.query());
+        return JSON.serialize(phoneService.query());
+    }
+
+    @RequestMapping(value = "/setting", method = RequestMethod.GET)
+    public String setting() {
+        return "setting";
     }
 
 }

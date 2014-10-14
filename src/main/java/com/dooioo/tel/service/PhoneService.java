@@ -32,25 +32,34 @@ public class PhoneService {
     @Autowired
     private Mongo mongo;
 
-	@Value("${application.message}")
-	private String name;
-
     public void insert(String name, String phoneGo) {
         BasicDBObject basicDBObject = new BasicDBObject();
         basicDBObject.put("name", name);
         basicDBObject.put("phoneGo", phoneGo);
-        basicDBObject.put("phoneCome", phoneGo);
+        basicDBObject.put("phoneCome", "51585229");
+        basicDBObject.put("phoneView", "15601622811");
         basicDBObject.put("status", 0);
         basicDBObject.put("id", getMaxId());
 
         getDBCollection().insert(basicDBObject);
     }
 
+    /**
+     * 查询所有有效的数据
+     *
+     * @return
+     */
     public List<DBObject> query() {
-        DBCursor cursor = getDBCollection().find().sort(new BasicDBObject("id", 1));
+        DBCursor cursor = getDBCollection().find().sort(new BasicDBObject("id", 1).append("status", 0));
         return cursor.toArray();
     }
 
+    /**
+     * 伪造一个自增的ID
+     * 因只是demo，所以不考虑并发问题
+     *
+     * @return
+     */
     private int getMaxId() {
         DBCursor cursor = getDBCollection().find().sort(new BasicDBObject("$natural",-1)).limit(1);
         if(cursor.hasNext()){

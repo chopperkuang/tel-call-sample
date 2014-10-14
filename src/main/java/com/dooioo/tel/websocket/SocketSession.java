@@ -7,7 +7,8 @@ import org.springframework.web.socket.WebSocketSession;
 import java.io.IOException;
 
 /**
- * Created by kuang on 14-10-13.
+ * 因为只是1个人使用的demo
+ * 这儿就只创建1个socket实例
  */
 
 public class SocketSession {
