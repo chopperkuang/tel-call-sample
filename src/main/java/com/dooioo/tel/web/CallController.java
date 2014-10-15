@@ -29,7 +29,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/call/*")
-public class CallController {
+public class CallController extends BaseController {
     private static Log logger = LogFactory.getLog(CallController.class);
 
     @Autowired
@@ -43,7 +43,7 @@ public class CallController {
 
 
     @RequestMapping(value = "/startCall", method = RequestMethod.GET)
-    public @ResponseBody String startCall(@RequestParam(value = "id", required = true) int id,
+    public @ResponseBody XmlResult startCall(@RequestParam(value = "id", required = true) int id,
                      @RequestParam(value = "phoneGo", required = true) String phoneGo,
                      @RequestParam(value = "phoneCome", required = false) String phoneCome) {
 
@@ -54,11 +54,11 @@ public class CallController {
 
         SocketSession.sendMessage(JSON.serialize(ret));
 
-        return "ok";
+        return ok(id);
     }
 
     @RequestMapping(value = "/answered", method = RequestMethod.GET)
-    public @ResponseBody String answered(@RequestParam(value = "id", required = true) int id,
+    public @ResponseBody XmlResult answered(@RequestParam(value = "id", required = true) int id,
                     @RequestParam(value = "phoneGo", required = true) String phoneGo,
                     @RequestParam(value = "phoneCome", required = false) String phoneCome) {
 
@@ -66,13 +66,14 @@ public class CallController {
         Map<String, Object> ret = new HashMap<String, Object>();
         ret.put("id", id);
         ret.put("type", "answered");
+
         SocketSession.sendMessage(JSON.serialize(ret));
 
-        return "ok";
+        return ok(id);
     }
 
     @RequestMapping(value = "/ticket", method = RequestMethod.POST)
-    public @ResponseBody String ticket(@RequestBody TicketRequest ticketRequest) {
+    public @ResponseBody XmlResult ticket(@RequestBody TicketRequest ticketRequest) {
         logger.info("ticket => " + ticketRequest.getId());
 
         Map<String, Object> ret = new HashMap<String, Object>();
@@ -82,7 +83,7 @@ public class CallController {
 
         SocketSession.sendMessage(JSON.serialize(ret));
 
-        return "ok";
+        return ok(ticketRequest.getId());
     }
 
     @RequestMapping(value = "/toSubmit", method = RequestMethod.GET)

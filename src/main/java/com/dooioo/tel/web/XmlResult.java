@@ -5,39 +5,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "info")
 public class XmlResult {
 
-    private int extId;
-    private String phone;
-    private String empPhone;
+    private int id;
+    private String msg;
 
-    public XmlResult() {}
-
-    public XmlResult(int extId, String phone, String empPhone) {
-        this.extId = extId;
-        this.phone = phone;
-        this.empPhone = empPhone;
+    public XmlResult(int id, String msg) {
+        this.id = id;
+        this.msg = msg;
     }
 
-    public int getExtId() {
-        return extId;
+    public XmlResult(String msg) {
+        this.msg = msg;
     }
 
-    public void setExtId(int extId) {
-        this.extId = extId;
+    public int getId() {
+        return id;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getMsg() {
+        return msg;
     }
 
-    public String getEmpPhone() {
-        return empPhone;
-    }
-
-    public void setEmpPhone(String empPhone) {
-        this.empPhone = empPhone;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
